@@ -7,6 +7,12 @@ def index(request):
 def test1(request,id):
 
     if request.method=='GET':
+
+        pxy=int(request.GET.get('pxy',0))
+        print('pxy=',pxy)
+
+
+
         # if 'id' in request.GET:
         #     id = request.GET['id']
         #     if id is not None:
@@ -54,10 +60,14 @@ def test1(request,id):
         y_list=[]
         for i in range(int(space_num/y_num)):
             y_list.append((i+1)*y_num)
-        return render(request,'test.html',{"title":id,'space_list':space_list,'y_list':y_list,'z_list':z_list,'sap':sap,'sd':sd})
+        return render(request,'test.html',{"title":id,'space_list':space_list,'y_list':y_list,'z_list':z_list,'sap':sap,'sd':sd,'pxy':pxy})
 from django.db.models import Q
 
-def ajax1(request):
+def surch(request):
+
+
+
+
         if request.method=='POST':
             tiaojian=request.POST['tiaojian']
             tiaojian=tiaojian.lstrip(',')
@@ -84,9 +94,10 @@ def ajax1(request):
             for i in zipji:
                 print (i)
                 q1.children.append((i[0]+i[1], i[2]))
+            q1.children.append(('sample_pos__tap',0))
 
             jieguo=Sample_info.objects.filter(q1)
-            jieguo1=jieguo.values('snum','num','sample_pos__box_ID','sample_pos__box_ID__box_pos','num__specimen_info__blh','num__specimen_info__kh','num__specimen_info__fllowup','num__specimen_info__sex','sample_pos__xy','num__name','sample_pos__box_ID__box_pos','sample_pos__box_ID__box_pos__sheet_ID__shnum')
+            jieguo1=jieguo.values('snum','num','classf','id','num__num','sample_pos__box_ID','sample_pos__box_ID__box_pos','num__specimen_info__blh','num__specimen_info__kh','num__specimen_info__fllowup','num__specimen_info__sex','sample_pos__xy','num__name','sample_pos__box_ID__box_pos','sample_pos__box_ID__box_pos__sheet_ID__shnum')
             jieguo2 =Sample_info.objects.filter(q1)
             for jiaa in jieguo2:
                 try:
@@ -98,7 +109,7 @@ def ajax1(request):
 
 
         else:
-            # ffff=Sample_info.objects.filter(num__creator__box).all()
+            # ffff=Sample_info.objects.filter(sample_pos__tap=).all()
             # print (ffff.snum)
 
             return render(request,'search.html')

@@ -20,4 +20,19 @@ def sample_pos2specimen(value):
 def do_list(value):
     return range(1, value+1)
 
+@register.filter(name='displayName')
+def display_ame(value, arg):
 
+        sex={
+            1:'男',
+            0:'女',
+            2:'不详',
+
+        }
+
+
+        classf = {
+            0:'血清',1:'血浆',2:'组织',
+
+        }
+        return  eval(arg)[value]

@@ -22,7 +22,7 @@ urlpatterns = [
     path('index', index),
     # path('test/aa', test1),
     path(r'box/<int:id>', test1,name='box'),
-    path(r'ajaxtest', ajax1),
+    path(r'surch', surch),
     path(r'ajaxtest1/', ajax2),
     path(r'bank/index/', bank_index),
     path(r'sheet/<int:id>', sheet),

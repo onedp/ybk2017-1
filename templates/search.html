@@ -2,6 +2,9 @@
 {% load i18n static tags%}
 {% block content %}
 
+<h2>样本查询</h2>
+
+
     <div id="hehe" class="sel2" style=display:none>
     <select name="zi" class="aaa">
     <option value="snum">样本编号</option>
@@ -27,30 +30,99 @@
     <button type="button" class="btn" onclick="quchu(this)">-</button>
     </div>
 {#    <button type="submit" class="btn">Search</button>#}
-    <button type="button" class="btn" onclick="tianjia()">添加条件</button>
 
 
-<form action="/ajaxtest" method="post"  id="surch_form" style="background: #f0f0f0 ;overflow: auto;border: outset">
+
+
+
+<form action="/surch" method="post"  id="surch_form" style="background: #f0f0f0 ;overflow: auto;border: outset">
 
 
 {% csrf_token %}
-<button id="go" type="submit" class="btn" style="display: block;">go</button>
-<input id="tj" type="text" name="tiaojian" >
+    <div class="panel panel-default">
+  <div class="panel-heading"><h4>查询条件</h4>
+
+  </div>
+  <div class="panel-body">
+     <button type="button" class="btn" style="display:inline-block" onclick="tianjia()">添加条件</button>
+<button id="go" type="submit" class="btn" style="display: inline-block">go</button>
+<input id="tj" type="text" name="tiaojian" style=display:none>
+  </div>
+</div>
+
 </form>
-<table class="table table-bordered">
+
+    <div class="panel panel-default" data-example-id="striped-table">
+    <div class="panel-heading" data-example-id="striped-table"><h3 class="col-lg-5" style="display: inline;margin: inherit">查询结果</h3>
+        <!-- Large modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-ex">导出EXCEL</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-chu">快速出库</button></div>
+<div class="modal fade bs-example-modal-ex" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title" id="myLargeModalLabel">excel</h4>
+        </div>
+        <div class="modal-body">
+          将查询的结果导出的excel中
+        </div>
+          <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a href="{% static "plugins/result.xlsx" %}" download="result{% now "Y-m-d" %}" type="button" class="btn btn-primary">Save</a>
+      </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+    <div class="modal fade bs-example-modal-chu" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title" id="myLargeModalLabel">chuku</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+{% if jieguo %}
+<table class="table table-bordered  table-hover">
+
+    <tr>
+        <td><input type="checkbox">全选 </td>
+    <td>样本编号</td>
+    <td>标本编号</td>
+    <td>姓名</td>
+    <td>类型</td>
+    <td>病历号</td>
+    <td>卡号</td>
+    <td>随访号</td>
+    <td>性别</td>
+    <td>BOX</td>
+    <td>SHEET</td>
+    <td>BANK</td>
+
+
+    </tr>
 {% for ti in jieguo %}
 <tr>
-    <td> {{ ti.snum }}</td>
-    <td> {{ ti.num }}</td>
+    <td><input type="checkbox" value="{{ ti.id }}" name="xuanlist"></td>
+    <td > <a href="{% url "box" ti.sample_pos__box_ID  %}?pxy={{ ti.sample_pos__xy}}">{{ ti.snum }}</a></td>
+    <td> {{ ti.num__num}}</td>
     <td> {{ ti.num__name}}</td>
+    <td> {{ ti.classf|displayName:'classf' }}</td>
     <td> {{ ti.num__specimen_info__blh}}</td>
     <td> {{ ti.num__specimen_info__kh}}</td>
     <td> {{ ti.num__specimen_info__fllowup}}</td>
-    <td> {{ ti.sample_pos__box_ID}}</td>
-    <td> {{ ti.num__specimen_info__sex}}</td>
-    <td> {{ ti.sample_pos__xy}}</td>
-    <td> {{ ti.sample_pos__box_ID__box_pos}}</td>
-    <td> {{ ti.sample_pos__box_ID__box_pos__sheet_ID__shnum}}</td>
+    <td> {{ ti.num__specimen_info__sex|displayName:'sex' }}</td>
+    <td> {{ ti.sample_pos__box_ID__boxnum}}<{{ ti.sample_pos__xy}}></td>
+
+        <td> {{ ti.sample_pos__box_ID__box_pos__sheet_ID__shnum}}<{{ ti.sample_pos__box_ID__box_pos__xy}}></td>
+    <td> {{ ti.sample_pos__box_ID__box_pos__sheet_ID__sheet_pos__bank_id__bnum}}<{{ ti.sample_pos__box_ID__box_pos__sheet_ID__sheet_pos__xy }}></td>
 
 
 </tr>
@@ -58,7 +130,7 @@
 
 </table>
 
-
+{% endif %}
 {% endblock %}
 
 

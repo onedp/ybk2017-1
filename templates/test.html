@@ -5,9 +5,9 @@
 
 
 {% block content %}
-
+{{ pxy }}
     <div class="row">
-    <div class="col-lg-5">
+    <div class="col-lg-7">
     <div style="border: double;background-color:#FFFFEF ">
 
 
@@ -17,7 +17,20 @@
 
                 <div style="position: relative;">
                     <div style="position: absolute;">
-                        {% if forloop.counter in z_list %}
+
+                    {% if forloop.counter == pxy %}
+
+                        <a class="brand" href="#">
+                <button type="button" id="{{ value.snum }}" class="btn btn-danger" alt="40x40" alt="{% sample_pos2specimen value.snum %} "  title="{{ value.snum }}" style="width: {{ sd }}px; height: {{ sd }}px;" onclick=funxue(this)>{{ forloop.counter}}</button>
+{#                                <img data-src="1" id="{{ value.snum }}" class="img-circle"#}
+{#                                     alt="{% sample_pos2specimen value.snum %} " title="{{ value.snum }}{{ key }}"#}
+{#                                     style="width: {{ sd }}px; height: {{ sd }}px;" src="{% static "plugins/picture/xue.jpg" %}"#}
+{#                                     onclick=funxue(this)>#}
+
+                            </a>
+
+
+                        {% elif forloop.counter in z_list %}
                             <a class="brand" href="#">
                 <button type="button" id="{{ value.snum }}" class="btn btn-warning" alt="40x40" alt="{% sample_pos2specimen value.snum %} "  title="{{ value.snum }}" style="width: {{ sd }}px; height: {{ sd }}px;" onclick=funxue(this)>{{ forloop.counter}}</button>
 {#                                <img data-src="1" id="{{ value.snum }}" class="img-circle"#}
@@ -170,7 +183,7 @@
         {#    };#}
         {# })#}
 
-        $(".btn-warning").click(function () {
+        $(".btn-warning,.btn-danger").click(function () {
 
 
 

@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 class Specimen(models.Model):
     num=models.CharField(verbose_name='标本编号',max_length=32)
     name=models.CharField(verbose_name='姓名',max_length=32)
+    state_list = ((0, '登记'), (1, '待分装'), (2, '已分装'),)
+    specimen_state=models.SmallIntegerField(choices=state_list)
     classf_list=((0,'血'),(1,'尿'),(2,'组织'),)
 
     classf=models.SmallIntegerField(choices=classf_list)
@@ -197,10 +199,6 @@ class Followup (models.Model):
 
     class Meta:
         verbose_name_plural = "随访记录"
-
-
-
-
 
 
 
