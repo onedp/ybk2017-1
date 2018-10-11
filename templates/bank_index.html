@@ -1,0 +1,51 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static tags %}
+
+
+
+
+{% block content %}
+
+    <div class="container-fluid">
+    <div class="col-md-12 col-sm-12 col-lg-12" style="border: double;background-color:#FFFFEF ">
+
+
+      <div class="row">
+          {% for bank in bank_list %}
+
+      <div class="col-sm-4 col-md-3" >
+        <div class="thumbnail">
+        <div class="thumbnail" style="margin-bottom: 0">
+          <img data-src="1" alt="100%x200" src="{% static "plugins/picture/bank.jpg" %}" data-holder-rendered="true" style="height: 240px; width: 200px; display: block; border: #54b6ff">
+        </div>
+          <div class="caption">
+            <h3>{{ bank.bnum }}</h3>
+            <p>{{ bank.get_bankmark_display}}</p>
+
+
+              <div class="btn-group" role="group" aria-label="...">
+  <a type="button" class="btn btn-info" href="/sheet/{{ bank.id }}">查看</a>
+  <a type="button" class="btn btn-default" href="#">管理</a>
+
+</div>
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+
+
+
+    </div>
+
+</div>
+</div>
+{% endblock %}
+
+{% block bottom-js %}
+    <script>
+
+
+
+
+    </script>
+{% endblock %}

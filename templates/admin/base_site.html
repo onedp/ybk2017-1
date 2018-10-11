@@ -1,0 +1,178 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">temp{{ site_header|default:_('Django administration121') }}</a></h1>
+{% endblock %}
+
+
+
+{% block nexthead %}
+        <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/static/js/ie-emulation-modes-warning.js"></script>
+
+
+{% endblock %}
+{% block leftbar%}
+{#    <div style="display: none;width: 160px;" ></div>#}
+
+
+{#          <ul class="nav nav-sidebar">#}
+{#            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>#}
+{#            <li><a href="#">Reports</a></li>#}
+{#            <li><a href="#">Analytics</a></li>#}
+{#            <li><a href="#">Export</a></li>#}
+{##}
+{#          </ul>#}
+
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Separated link</a>
+        <ul class="dropdown-menu" aria-expanded="true" aria-labelledby="collapseListGroupHeading1" >
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+
+        </ul>
+    </li>
+
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">样本库浏览</a></h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <a class="panel-body list-group-item " href="/bank/index">样本库浏览</a>
+            <li class="dropdown list-group-item">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Separated link</a>
+        <ul class="dropdown-menu" aria-expanded="true" aria-labelledby="collapseListGroupHeading1" >
+            <li><a href="/bank/index">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+
+        </ul>
+    </li>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">容器管理</a></h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+
+            <li class="dropdown list-group-item">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">新增容器</a>
+        <ul class="dropdown-menu" aria-expanded="true" aria-labelledby="collapseListGroupHeading1" >
+            <li><a href="/admin/ybk/bank/add/">新增冰箱</a></li>
+            <li><a href="/admin/ybk/sheet/add/">新增冻存架</a></li>
+            <li><a href="/admin/ybk/box/add/">新建盒子</a></li>
+
+
+        </ul>
+    </li>
+            <a class="panel-body list-group-item " href="#">容器搬移</a>
+        </div>
+    </div>
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h4 class="panel-title"><a data-toggle="collapse"data-parent="#accordion"href="#collapseThree">标本管理</a></h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse">
+            <a class="panel-body list-group-item " href="/admin/ybk/specimen/add/">新增标本</a>
+            <a class="panel-body list-group-item " href="/admin/ybk/specimen/">标本管理</a>
+
+            <a class="panel-body list-group-item " href="/admin/ybk/specimen_info/add/">录入捐赠者信息</a>
+            <a class="panel-body list-group-item " href="/admin/ybk/specimen_info/">管理捐赠者信息</a>
+            <a class="panel-body list-group-item " href="#">分装</a>
+            <a class="panel-body list-group-item " href="#">样本存入冻存盒</a>
+            <a class="panel-body list-group-item " href="#">冻存盒入库</a>
+
+
+
+        </div>
+    </div>
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h4 class="panel-title"><a data-toggle="collapse"data-parent="#accordion"href="#collapsefour">信息管理</a></h4>
+        </div>
+        <div id="collapsefour" class="panel-collapse collapse">
+            <a class="panel-body list-group-item " href="/admin/ybk/science/">科研管理</a>
+            <a class="panel-body list-group-item " href="/admin/ybk/science/add/">录入科研数据</a>
+            <a class="panel-body list-group-item " href="/admin/ybk/followup/">随访管理</a>
+            <a class="panel-body list-group-item " href="/admin/ybk/followup/add/">录入随访</a>
+            <a class="panel-body list-group-item " href="/admin/ybk/clinical/">医疗信息</a>
+            <a class="panel-body list-group-item " href="/admin/ybk/clinical/add/">录入医疗信息</a>
+
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title"><a data-toggle="collapse"data-parent="#accordion"href="#collapsefive">样本管理</a></h4>
+        </div>
+        <div id="collapsefive" class="panel-collapse collapse">
+            <a class="panel-body list-group-item " href="#">样本查询</a>
+            <a class="panel-body list-group-item " href="/admin/ybk/apply/add/">新增申请单</a>
+            <a class="panel-body list-group-item " href="/admin/ybk/apply/">查看申请单记录</a>
+            <a class="panel-body list-group-item " href="/admin/ybk/outlist/add/">新建出库单</a>
+            <a class="panel-body list-group-item " href="/admin/ybk/outlist/">出库单查询</a>
+
+        </div>
+    </div>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h4 class="panel-title"><a data-toggle="collapse"data-parent="#accordion"href="#collapse6">系统管理</a></h4>
+        </div>
+        <div id="collapse6" class="panel-collapse collapse">
+            <a class="panel-body list-group-item " href="/admin/ybk/userlist/">人员管理</a>
+            <a class="panel-body list-group-item " href="/admin/ybk/role/">角色管理</a>
+
+        </div>
+    </div>
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h4 class="panel-title"><a data-toggle="collapse"data-parent="#accordion"href="#collapse7">扩展</a></h4>
+        </div>
+        <div id="collapse7" class="panel-collapse collapse">
+            <div class="panel-body list-group-item " href="#">标题三对应的内容</div>
+
+        </div>
+    </div>
+</div>
+
+
+{#          <ul class="nav nav-stacked">#}
+{#            <li><a href="">Nav item</a></li>#}
+{#            <li><a href="">Nav item again</a></li>#}
+{#            <li><a href="">One more nav</a></li>#}
+{#            <li><a href="">Another nav item</a></li>#}
+{#            <li><a href="">More navigation</a></li>#}
+{#          </ul>#}
+{#          <ul class="nav nav-stacked">#}
+{#            <li><a href="">Nav item again</a></li>#}
+{#            <li><a href="">One more nav</a></li>#}
+{#            <li><a href="">Another nav item</a></li>#}
+{#          </ul>#}
+
+
+
+
+{% endblock %}
+{% block nav-global %}{% endblock %}
+
+{% block bottom-js%}
+
+
+
+
+{% endblock %}

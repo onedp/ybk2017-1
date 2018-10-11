@@ -1,0 +1,207 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static tags %}
+
+
+
+
+{% block content %}
+
+    <div class="row">
+    <div class="col-lg-5">
+    <div style="border: double;background-color:#FFFFEF ">
+
+
+        {% for key,value in space_list.items|dictsort:0 %}
+
+            <div style="float: left;">
+
+                <div style="position: relative;">
+                    <div style="position: absolute;">
+                        {% if forloop.counter in z_list %}
+                            <a class="brand" href="#">
+                <button type="button" id="{{ value.snum }}" class="btn btn-warning" alt="40x40" alt="{% sample_pos2specimen value.snum %} "  title="{{ value.snum }}" style="width: {{ sd }}px; height: {{ sd }}px;" onclick=funxue(this)>{{ forloop.counter}}</button>
+{#                                <img data-src="1" id="{{ value.snum }}" class="img-circle"#}
+{#                                     alt="{% sample_pos2specimen value.snum %} " title="{{ value.snum }}{{ key }}"#}
+{#                                     style="width: {{ sd }}px; height: {{ sd }}px;" src="{% static "plugins/picture/xue.jpg" %}"#}
+{#                                     onclick=funxue(this)>#}
+
+                            </a>
+
+
+                        {% endif %}
+                    </div>
+                <button type="button" class="btn btn-default" alt="40x40" style="width: {{ sd }}px; height: {{ sd }}px;" onclick=console.log({{ key }})>{{ forloop.counter}}</button>
+{#                    <img data-src="2" class="img-thumbnail" alt="40x40" style="width: {{ sd }}px; height: {{ sd }}px;"#}
+{#                         src="{% static "plugins/picture/gezi.PNG" %}" onclick=console.log({{ key }})>#}
+
+
+                </div>
+            </div>
+
+
+            {% if forloop.counter in y_list %}
+
+                <div style="clear:both"></div>
+
+            {% endif %}
+
+
+
+
+
+        {% endfor %}
+</div>
+
+    </div>
+    <div class="col-lg-4 ">
+        <div class="btn-group" role="group" aria-label="...">
+            <a id="id_left" type="button" class="btn btn-default" href="#">修改</a>
+            <a id="id_mid" type="button" class="btn btn-default" href="#">删除</a>
+            <a id="id_right" type="button" class="btn btn-default" href="#">撤销入盒</a>
+        </div>
+
+    </div>
+
+    <div class="col-lg-4">
+    <div class="bs-example" data-example-id="hoverable-table">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th id="bh">点击查看</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">姓名</th>
+                <td id="xm"> </td>
+
+            </tr>
+            <tr>
+                <th scope="row">年龄</th>
+                <td id="age"> </td>
+
+            </tr>
+            <tr>
+                <th scope="row">卡号</th>
+                <td id="kh"> </td>
+
+            </tr>
+
+            <tr>
+                <th scope="row">病历号</th>
+                <td id="blh"> </td>
+
+            </tr>
+            <tr>
+                <th scope="row">随访号</th>
+                <td id="flup"> </td>
+
+
+            </tr>
+            <tr>
+                <th scope="row">创建人</th>
+                <td id="ctor">  </td>
+
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        </div>
+
+        </div>
+{% endblock %}
+
+{% block bottom-js %}
+    <script>
+
+        {# function funxue(self)#}
+        {#    {#}
+        {#        var aa=$(this).attr("title");#}
+        {#        console.log(aa);#}
+        {##}
+        {#        //查找每个button所在行的td的值#}
+        {##}
+        {#        $.ajax({#}
+        {#            type: 'GET',#}
+        {#            url: '/test/1',#}
+        {#            data: {'id':$(this).attr("id")},#}
+        {##}
+        {#            dataType: 'json',#}
+        {#            success: function (response, stutas, xhr) {#}
+        {##}
+        {#                $("#asd").text(response);#}
+        {##}
+        {#            }#}
+        {##}
+        {##}
+        {#        });#}
+        {##}
+        {##}
+        {#    };#}
+        {##}
+        {##}
+        {##}
+        {##}
+        {#$(document).ready(function(){#}
+        {# function funxue(self)#}
+        {#    {#}
+        {#        //查找每个button所在行的td的值#}
+        {#        alert("aaa");#}
+        {#        $.ajax({#}
+        {#            type: 'GET',#}
+        {#            url: '/test/',#}
+        {#            data: $(this).id,#}
+        {##}
+        {#            dataType: 'json',#}
+        {#            success: function (response, stutas, xhr) {#}
+        {##}
+        {#                $("#asd").text(response);#}
+        {##}
+        {#            }#}
+        {##}
+        {##}
+        {#        });#}
+        {##}
+        {#        console.log($(this).id);#}
+        {#    };#}
+        {# })#}
+
+        $(".btn-warning").click(function () {
+
+
+
+
+            //$.post("")
+            {#            var dd=$("#aa1").attr("id")#}
+
+            var dd = $(this).attr("id")
+            {#            alert(dd)#}
+            var post_data = {"id": dd};
+            $.get("/ajaxtest1/", post_data, function (datas) {
+
+
+                var xx = eval(datas)
+                $("#bh").text(xx[0].bh)
+                $("#xm").text(xx[0].name)
+                $("#age").text(xx[0].age)
+                $("#kh").text(xx[0].kh)
+                $("#blh").text(xx[0].blh)
+                $("#flup").text(xx[0].flup)
+                $("#ctor").text(xx[0].ctor)
+                {#                alert(xx[0].b)#}
+                var change='/admin/ybk/sample_info/qwer/change/'.replace('qwer',xx[0].id).replace(' ','')
+                $("#id_left").attr("href",change)
+                var del =change.replace('change','delete')
+                $("#id_mid").attr("href",del)
+            })
+{#http://127.0.0.1:8000/admin/ybk/sample_info/11/change/#}
+
+        });
+
+
+    </script>
+{% endblock %}

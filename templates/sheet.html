@@ -1,0 +1,152 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static tags %}
+
+
+{% block coltype %}
+{#    col-md-12 col-sm-12 col-lg-12#}
+
+container
+{% endblock %}
+
+{% block content %}
+
+
+<div class="row " >
+
+    <div class="col-md-7 col-sm-7 col-lg-7" style="border: double;background-color:#FFFFEF ">
+<h2 style="margin: inherit">{{ bank.bnum }}</h2>
+
+        <div class="row " >
+            {% for i in listsh %}
+                {% if i %}
+
+
+        <div id="{{ forloop.counter }}" class="col-md-3" style="border: double ;height:150px ;background: ThreeDDarkShadow;">
+
+        <div class="row " >
+
+        {% for e in i %}
+
+                    {% if e %}
+                         <button  id="{{ e.0 }}"type="button" class="btn btn-info col-md-2" style="min-width: 36px;min-height: 20px;padding-right: inherit;padding-left: inherit" ></button>
+                    {% else %}
+
+            <button id="{{ forloop.counter }}" type="button" class="btn btn-default col-md-2" style="min-width: 36px;min-height: 20px;padding-right: inherit;padding-left: inherit" ></button>
+{#         <div class="col-md-3" style="border: solid #ff3822 2px;height:auto;min-width: 4px;padding: inherit">1</div>#}
+
+
+
+                    {% endif %}
+            {% endfor %}
+
+
+        </div>
+
+
+        </div>
+
+{% else %}
+  <div class="col-md-3" style="border: double ;height:150px"></div>
+  {% endif %}
+            {% endfor %}
+
+
+
+
+
+    </div>
+</div>
+
+
+ <div class="col-lg-4">
+
+        <div class="btn-group" role="group" aria-label="...">
+            <a id="id_left" type="button" class="btn btn-default " href="#">查看详细</a>
+            <a id="id_mid" type="button" class="btn btn-danger" href="#">整盒删除</a>
+            <a id="id_right" type="button" class="btn btn-warning" href="#">撤销入架</a>
+        </div>
+
+
+    <div class="bs-example" data-example-id="hoverable-table">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>box编号</th>
+                <th id="boxh">点击查看</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">box类型</th>
+                <td id="bt"> </td>
+
+            </tr>
+            <tr>
+                <th scope="row">sheet号</th>
+                <td id="st"> </td>
+
+            </tr>
+            <tr>
+                <th scope="row">bank号</th>
+                <td id="bankh"> </td>
+
+            </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+        </div>
+</div>
+
+
+{% endblock %}
+
+{% block bottom-js %}
+    <script>
+$(".btn-info").click(function () {
+
+    var dd =($(this).attr("id"))
+    dd=dd.replace(/\[/g,'').replace(/\]/g,'')
+    dd=dd.split(',')
+{#    console.log($(this).attr("id"))#}
+{#    console.log(dd[2])#}
+
+
+
+        $("#boxh").text(dd[1])
+    $("#bt").text(dd[2])
+    var as=parseInt(dd[2])
+{#    console.log(typeof as)#}
+    if (as==0)
+            $("#bt").text('10*10')
+    else if (as==1)
+            $("#bt").text('8*12')
+    else if (as==2)
+            $("#bt").text('6*8')
+
+
+
+
+
+
+        $("#st").text(dd[3])
+        $("#bankh").text(dd[4])
+        var bbo='/box/xwf'.replace('xwf',dd[1]).replace(' ','')
+
+        $("#id_left").attr("href",bbo)
+
+})
+
+
+
+
+
+
+
+
+
+    </script>
+{% endblock %}

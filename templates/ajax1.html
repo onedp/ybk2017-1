@@ -1,0 +1,127 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static tags%}
+{% block content %}
+
+<button id="s1-1" class="sss">aa1</button>
+<button id="s2-1" class="sss">aa2</button>
+<p id="ww">bb</p>
+
+
+    <div id="hehe" class="sel2" style=display:none>
+    <select name="zi" class="aaa">
+    <option value="snum">样本编号</option>
+    <option value="num__num">标本编号</option>
+    <option value="num__name">姓名</option>
+    <option value="classf">类型</option>
+    <option value="num__specimen_info__kh">卡号</option>
+    <option value="num__specimen_info__blh">病历号</option>
+    <option value="num__specimen_info__age">年龄</option>
+    <option value="num__specimen_info__fllowup">随访号</option>
+</select>
+<select name="duan" class="bbb">
+    <option value="">=</option>
+    <option value="__gt">></option>
+    <option value="__lt"><</option>
+    <option value="__lte"><=</option>
+    <option value="__gte">>=</option>
+    <option value="__istartswith">开头</option>
+    <option value="__iendswith">结尾</option>
+    <option value="__contains">包含</option>
+</select>
+    <input type="text" class="span2" name="shu">
+    <button type="button" class="btn" onclick="quchu(this)">-</button>
+    </div>
+{#    <button type="submit" class="btn">Search</button>#}
+    <button type="button" class="btn" onclick="tianjia()">添加条件</button>
+
+
+<form action="/ajaxtest" method="post"  id="surch_form" style="background: #f0f0f0 ;overflow: auto;border: outset">
+
+
+{% csrf_token %}
+<button id="go" type="submit" class="btn" style="display: block;">go</button>
+<input id="tj" type="text" name="tiaojian" >
+</form>
+<table class="table table-bordered">
+{% for ti in jieguo %}
+<tr>
+    <td> {{ ti.snum }}</td>
+    <td> {{ ti.num }}</td>
+    <td> {{ ti.num__name}}</td>
+    <td> {{ ti.num__specimen_info__blh}}</td>
+    <td> {{ ti.num__specimen_info__kh}}</td>
+    <td> {{ ti.num__specimen_info__fllowup}}</td>
+    <td> {{ ti.sample_pos__box_ID}}</td>
+    <td> {{ ti.num__specimen_info__sex}}</td>
+    <td> {{ ti.sample_pos__xy}}</td>
+    <td> {{ ti.sample_pos__box_ID__box_pos}}</td>
+    <td> {{ ti.sample_pos__box_ID__box_pos__sheet_ID__shnum}}</td>
+
+
+</tr>
+    {% endfor %}
+
+</table>
+
+
+{% endblock %}
+
+
+
+{% block bottom-js %}
+<script>
+var ide=1
+var idea='a'
+function tianjia() {
+
+    idea='a'+ide
+    $('#hehe').clone(true).appendTo('#surch_form').attr({'id':idea,'style':'float:left'});
+
+    ide=ide+1
+};
+function quchu(self) {
+
+   $(self).parent().remove()
+};
+
+
+$(".sss").click(function(){
+
+            //$.post("")
+{#            var dd=$("#aa1").attr("id")#}
+
+            var dd=$(this).attr("id")
+{#            alert(dd)#}
+            var post_data ={"id":dd};
+            $.get("/ajaxtest1/",post_data,function(datas){
+
+                $("#ww").text(datas)
+                var xx=eval(datas)
+
+                alert(xx[0].b)
+            })
+
+        });
+
+$("#go").click(function () {
+var num= new Array();
+num[1]=new Array();
+num[2]=new Array();
+num[0]=new Array();
+
+    console.log('aaa');
+    $("form input:gt(0)").each(function (){num[0].push($(this).val())});
+        console.log(num[0])
+    $("form select[name=\"duan\"]").each(function (){num[2].push($(this).val())});
+    $("form select[name=\"zi\"]").each(function (){num[1].push($(this).val())});
+
+str=num.join('|')
+    console.log(str)
+    $('#tj').attr('value',str)
+})
+
+
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static tags%}
+{% block content %}
+
+<button id="s1-1" class="sss">aa1</button>
+<button id="s2-1" class="sss">aa2</button>
+<p id="ww">bb</p>
+
+{% endblock %}
+
+
+
+{% block bottom-js %}
+<script>
+
+
+$(".sss").click(function(){
+
+            //$.post("")
+{#            var dd=$("#aa1").attr("id")#}
+
+            var dd=$(this).attr("id")
+{#            alert(dd)#}
+            var post_data ={"id":dd};
+            $.get("/ajaxtest1/",post_data,function(datas){
+
+                $("#ww").text(datas)
+                var xx=eval(datas)
+
+                alert(xx[0].b)
+            })
+
+        });
+
+</script>
+{% endblock %}
