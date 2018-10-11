@@ -7,4 +7,10 @@ from ybk.models import *
 
 
 def fenzh(request):
+
+
+
+
+
+
     return render(request,'fenzh.html')

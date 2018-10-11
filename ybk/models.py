@@ -7,7 +7,7 @@ class Specimen(models.Model):
     name=models.CharField(verbose_name='姓名',max_length=32)
     state_list = ((0, '登记'), (1, '待分装'), (2, '已分装'),)
     specimen_state=models.SmallIntegerField(choices=state_list)
-    classf_list=((0,'血'),(1,'尿'),(2,'组织'),)
+    classf_list=((0,'血'),(1,'尿'),(2,'组织'),(3,'精液'),(4,'卵泡液'),(5,'毛发'),)
 
     classf=models.SmallIntegerField(choices=classf_list)
     specimen_info=models.ForeignKey('Specimen_info',on_delete=models.CASCADE)
