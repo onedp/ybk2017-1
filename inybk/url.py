@@ -16,24 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from ybk.views import *
-
+from inybk.views import *
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('index', index),
-    # path('test/aa', test1),
-    path(r'box/<int:id>', test1,name='box'),
-    path(r'surch', surch),
-    path(r'ajaxtest1/', ajax2),
-    path(r'bank/index/', bank_index),
-    path(r'sheet/<int:id>', sheet),
-    path(r'inybk/', include('inybk.url')),
-
-    # path(r,surch )
-
-
+    path('fen/', fenzh),
 
 
 ]
-
-
-# 1:119 GET http://127.0.0.1:8000/test/static/plugins/picture/xue.jpg 404 (Not Found)

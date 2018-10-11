@@ -56,8 +56,10 @@
     <div class="panel-heading" data-example-id="striped-table"><h3 class="col-lg-5" style="display: inline;margin: inherit">查询结果</h3>
         <!-- Large modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-ex">导出EXCEL</button>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-chu">快速出库</button></div>
-<div class="modal fade bs-example-modal-ex" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;">
+<button type="button" id ="chuku" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-chu">快速出库</button></div>
+
+    </div>
+    <div class="modal fade bs-example-modal-ex" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
 
@@ -83,9 +85,21 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
           <h4 class="modal-title" id="myLargeModalLabel">chuku</h4>
         </div>
+          <form action="/chuku" method="post" id="chuku_form">
+              {% csrf_token %}
         <div class="modal-body">
-          ...
+
+            <p id ="chukumun"> </p>
+            <p id ="chukulist1"> </p>
+
+                <input id="chukulist" type="text" name="chukulist" style="display: none" >
+
         </div>
+           <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               <button type="submit" class="btn btn-primary">出库</button>
+      </div>
+          </form>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div>
@@ -110,7 +124,7 @@
     </tr>
 {% for ti in jieguo %}
 <tr>
-    <td><input type="checkbox" value="{{ ti.id }}" name="xuanlist"></td>
+    <td><input type="checkbox" value="{{ ti.snum }}" name="xuanlist"></td>
     <td > <a href="{% url "box" ti.sample_pos__box_ID  %}?pxy={{ ti.sample_pos__xy}}">{{ ti.snum }}</a></td>
     <td> {{ ti.num__num}}</td>
     <td> {{ ti.num__name}}</td>
@@ -187,6 +201,21 @@ str=num.join('|')
     $('#tj').attr('value',str)
 })
 
+$("#chuku").click(function(){
+    //$('input:checkbox:checked') 等同于 $('input[type=checkbox]:checked')
+    //意思是选择被选中的checkbox
+    $("#chukumun").empty()
+    $("#chukulist").empty()
+    $("#chukumun").append("你选了："+$('input[type=checkbox]:checked').length+"个: ");
+    chukul=new Array();
+    $.each($('input:checkbox:checked'),function(){
+        $('#chukulist1').append($(this).val()+',')
+        chukul.push($(this).val());
+    });
+
+    $('#chukulist').attr('value',chukul)
+
+});
 
 
 

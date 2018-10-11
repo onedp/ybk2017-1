@@ -66,8 +66,9 @@
         {% block nav-global %}{% endblock %}
     </div>
     <!-- END Header -->
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 ">
+<div class="row">
+        <div class="col-sm-3  col-md-2 col-lg-2 "style="height:40px;background: #f5f5f5;padding-right: 0;"></div>
+        <div class="col-sm-9  col-md-10  col-lg-10 "style="background: #f5f5f5">
     {% block breadcrumbs %}
     <div class="breadcrumbs">
     <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
@@ -76,7 +77,7 @@
     {% endblock %}
         </div>
     {% endif %}
-
+  </div>
 <div class="row">
         <div class="col-sm-3 col-md-2 col-lg-2 sidebar " style="padding-left: 5px ;padding-right: 5px">
 {#<div style=" width: 160px ;float: left ;padding-right: 10px;" >#}
@@ -84,7 +85,7 @@
 </div>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-2 main">
 <div class="row">
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-2 main">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-2 main" style="padding: 0">
     {% block messages %}
         {% if messages %}
         <ul class="messagelist">{% for message in messages %}
@@ -94,7 +95,7 @@
     {% endblock messages %}
  </div>
     <!-- Content -->
-    <div id="content" aa="wa" class="col-lg-11 {% block coltype %}{% endblock %}"style="float: left">
+    <div id="content" aa="wa" class="col-lg-12 {% block coltype %}{% endblock %}"style="float: left">
     <div class="row">
         {% block pretitle %}{% endblock %}
         {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
