@@ -206,3 +206,8 @@ def sheet(request,id):
 
 
     return render(request, "sheet.html",{'listsh':listsh,'bank':bank})
+
+
+
+def date(request):
+    return render(request,'i111ndex.html')

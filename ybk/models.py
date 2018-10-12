@@ -14,6 +14,7 @@ class Specimen(models.Model):
     creator=models.ForeignKey('Userlist',on_delete=models.CASCADE)
     remark=models.TextField(null=True,blank=True)
     creattime=models.TimeField(auto_created='NOW')
+    fentime=models.DateField(null=True,blank=True)
     def __str__(self):
         return self.num
     class Meta:

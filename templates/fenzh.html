@@ -2,6 +2,11 @@
 {% load i18n static tags %}
 
 
+{% block extrastyle %}
+
+
+<link href={% static "css/bootstrap-datetimepicker.min.css"%} rel="stylesheet" media="screen">
+{% endblock %}
 {% block coltype %}
 {#    col-md-12 col-sm-12 col-lg-12#}
 
@@ -13,7 +18,24 @@ container
         <div class="col-lg-4 panel panel-primary">
         <div class="panel-heading">待分装标本</div>
         <div class="panel-body">
-            选择类型<select id="leixing" name="类型" class="select2-dropdown">
+
+
+            <form id="daifentiaojian" method="get" >
+            <div class="form-group" style="margin-bottom: 0">
+                <label for="dtp_input2" class="col-md-1 control-label" style="margin-bottom: 0;padding: 0">日期</label>
+                <div class="input-group date form_date col-md-7" data-date="" data-date-format="yyyy-mm-dd " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input name="timel" class="form-control" size="16" type="text" value="{% now "Y-m-d" %}" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+				<input type="hidden" id="dtp_input2" value="" /><br/>
+            </div>
+
+
+
+
+
+            选择类型<select id="leixing" name="lx" class="select2-dropdown">
                 <option value="0">全血</option>
             　　<option value="1">尿</option>
             　　<option value="2">组织</option>
@@ -23,11 +45,11 @@ container
 
 
             </select>
-
-            
+            <button type="submit" >查询</button>
+            </form>
         </div>
         <div class="panel-footer">
-            标本列
+
         </div>
 
 
@@ -38,7 +60,47 @@ container
         <div class="col-lg-4 panel panel-default">
         <div class="panel-heading">分装</div>
         <div class="panel-body">
-            模板
+
+            <div id="tiao"style="display: none">
+
+            <tr><td>
+            <select id="leixing1" name="类型" class="select2-dropdown">
+                <option value="0">全血</option>
+            　　<option value="1">尿</option>
+            　　<option value="2">组织</option>
+            　　<option value="3">精液</option>
+            　　<option value="4">卵泡液</option>
+            　　<option value="5">毛发</option>  　　
+            </select>
+                </td>
+                <td>
+            <input id="nm" type="text" name="shuliang" style="width: 40px"></td>
+
+            <td><input id="vm" type="text" name="tiji" style="width: 40px"></td>
+
+            <td><button class="btn btn-default" type="button" onclick="quchu(this)">-</button> </td>
+
+                </tr>
+            </div>
+             <select id="leixing1" name="类型" class="select2-dropdown">
+                 <option value="0">全血1</option>
+            　　<option value="1">尿2</option>
+            　　<option value="2">组织1</option>
+            　　<option value="3">精液1</option>
+            　　<option value="4">卵泡液2</option>
+            　　<option value="5">毛发1</option>
+             </select>
+            <button class="btn btn-default" type="button">添加模板</button>
+            <button class="btn btn-default" type="button" onclick="tianjia()" >添加</button>
+            <form id="fenlist" class="panel-body">
+                <tr>
+                    <td>__类型___</td>
+                    <td>___数量</td>
+                    <td>_体积</td>
+                    <td>_-_</td>
+                </tr>
+
+            </form>
         </div>
         <div class="panel-footer">
             条目
@@ -48,7 +110,10 @@ container
         <div class="col-lg-4 panel panel-primary">
         <div class="panel-heading">已分装标本</div>
         <div class="panel-body">
-            筛选区
+
+
+条目
+
         </div>
         <div class="panel-footer">
             条目
@@ -71,7 +136,42 @@ container
 {% endblock %}
 
 {% block bottom-js %}
-    <script>
 
+
+<script type="text/javascript" src="{% static "js/bootstrap-datetimepicker.min.js"%}" charset="UTF-8"></script>
+<script type="text/javascript" src="{% static "js/locales/bootstrap-datetimepicker.zh-CN.js"%}" charset="UTF-8"></script>
+
+
+
+
+
+    <script>
+        var ide=1
+        var idea='a'
+function tianjia() {
+
+    idea='a'+ide
+    $('#tiao').clone(true).appendTo('#fenlist').attr({'id':idea,'style':'float:left'});
+
+    ide=ide+1
+};
+
+function quchu(self) {
+
+   $(self).parent().remove()
+};
+
+$('.form_date').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+        Boolean: "linked"
+    });
+$('.form_date').datetimepicker('update',formatDate(thisNow,'yyyy-mm-dd'));
     </script>
 {% endblock %}

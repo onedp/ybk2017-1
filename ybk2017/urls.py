@@ -25,6 +25,7 @@ urlpatterns = [
     path(r'surch', surch),
     path(r'ajaxtest1/', ajax2),
     path(r'bank/index/', bank_index),
+    path(r'date1', date),
     path(r'sheet/<int:id>', sheet),
     path(r'inybk/', include('inybk.url')),
 
