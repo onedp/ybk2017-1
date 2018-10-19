@@ -167,9 +167,21 @@ class Outlist(models.Model):
 
 
 class Science (models.Model):
-    scinum=models.CharField(max_length=32)
-    scitext=models.TextField(null=True,blank=True)
-    snum = models.ManyToManyField('Sample_info')
+    scinum=models.CharField('科研编号',max_length=32)
+    scitext=models.TextField('项目说明',null=True,blank=True)
+    Applicant=models.CharField('申请人',max_length=32,null=True,blank=True)
+    Project = models.IntegerField(choices=[(0, '基因组'),(1, '转录组'),(2, '蛋白组'),(3, '表观遗传组'),],default=1)
+    Test_content=models.CharField('项目',max_length=32)
+    Result=models.CharField('结果',max_length=32,null=True,blank=True)
+    Other=models.CharField('其他',max_length=32,null=True,blank=True)
+    test_order=models.CharField('检测项目',max_length=32,null=True,blank=True)
+    test_order_result=models.CharField('检测项目结果',max_length=32,null=True,blank=True)
+    Detection_of_gene=models.CharField('检测基因',max_length=32,null=True,blank=True)
+    Detection_of_gene_result=models.CharField('检测基因结果',max_length=32,null=True,blank=True)
+    remark=models.TextField('额外记录',null=True,blank=True)
+
+
+    snum = models.ManyToManyField('Sample_info',verbose_name='样本编号')
     creator = models.ForeignKey('Userlist',on_delete=models.CASCADE)
 
 

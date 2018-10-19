@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="db">
-  <database-model serializer="dbm" rdbms="SQLITE" format-version="4.9">
+  <database-model serializer="dbm" rdbms="SQLITE" format-version="4.11">
     <root id="1">
       <ServerVersion>3.20.1</ServerVersion>
     </root>
@@ -62,7 +62,6 @@
     <index id="41" parent="6" name="sqlite_autoindex_auth_group_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>name</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="42" parent="6">
@@ -92,16 +91,13 @@
     <index id="47" parent="7" name="auth_group_permissions_group_id_permission_id_0cd325b0_uniq">
       <ColNames>group_id
 permission_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="48" parent="7" name="auth_group_permissions_group_id_b120cbf9">
       <ColNames>group_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="49" parent="7" name="auth_group_permissions_permission_id_84c5c92e">
       <ColNames>permission_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="50" parent="7">
       <ColNames>id</ColNames>
@@ -145,12 +141,10 @@ permission_id</ColNames>
     <index id="57" parent="8" name="auth_permission_content_type_id_codename_01ab375a_uniq">
       <ColNames>content_type_id
 codename</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="58" parent="8" name="auth_permission_content_type_id_2f476e4b">
       <ColNames>content_type_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="59" parent="8">
       <ColNames>id</ColNames>
@@ -221,7 +215,6 @@ codename</ColNames>
     <index id="72" parent="9" name="sqlite_autoindex_auth_user_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="73" parent="9">
@@ -251,16 +244,13 @@ codename</ColNames>
     <index id="78" parent="10" name="auth_user_groups_user_id_group_id_94350c0c_uniq">
       <ColNames>user_id
 group_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="79" parent="10" name="auth_user_groups_user_id_6a12ed8b">
       <ColNames>user_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="80" parent="10" name="auth_user_groups_group_id_97559544">
       <ColNames>group_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="81" parent="10">
       <ColNames>id</ColNames>
@@ -299,16 +289,13 @@ group_id</ColNames>
     <index id="87" parent="11" name="auth_user_user_permissions_user_id_permission_id_14a6b632_uniq">
       <ColNames>user_id
 permission_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="88" parent="11" name="auth_user_user_permissions_user_id_a95ead1b">
       <ColNames>user_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="89" parent="11" name="auth_user_user_permissions_permission_id_1fbb5f2c">
       <ColNames>permission_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="90" parent="11">
       <ColNames>id</ColNames>
@@ -369,11 +356,9 @@ permission_id</ColNames>
     </column>
     <index id="101" parent="12" name="django_admin_log_content_type_id_c4bce8eb">
       <ColNames>content_type_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="102" parent="12" name="django_admin_log_user_id_c564eba6">
       <ColNames>user_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="103" parent="12">
       <ColNames>id</ColNames>
@@ -412,7 +397,6 @@ permission_id</ColNames>
     <index id="109" parent="13" name="django_content_type_app_label_model_76bd3d3b_uniq">
       <ColNames>app_label
 model</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="110" parent="13">
@@ -462,12 +446,10 @@ model</ColNames>
     <index id="119" parent="15" name="sqlite_autoindex_django_session_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>session_key</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="120" parent="15" name="django_session_expire_date_a5c62663">
       <ColNames>expire_date</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="121" parent="15">
       <ColNames>session_key</ColNames>
@@ -537,7 +519,6 @@ model</ColNames>
     </column>
     <index id="136" parent="18" name="ybk_apply_creator_id_fa57ff3d">
       <ColNames>creator_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="137" parent="18">
       <ColNames>id</ColNames>
@@ -578,7 +559,6 @@ model</ColNames>
     </column>
     <index id="144" parent="19" name="ybk_bank_creator_id_a472adc3">
       <ColNames>creator_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="145" parent="19">
       <ColNames>id</ColNames>
@@ -614,7 +594,6 @@ model</ColNames>
     </column>
     <index id="151" parent="20" name="ybk_box_creator_id_1e248b7b">
       <ColNames>creator_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="152" parent="20">
       <ColNames>id</ColNames>
@@ -651,12 +630,10 @@ model</ColNames>
     <index id="158" parent="21" name="sqlite_autoindex_ybk_box_pos_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>bnum_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="159" parent="21" name="ybk_box_pos_sheet_ID_id_d044898b">
       <ColNames>sheet_ID_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="160" parent="21">
       <ColNames>id</ColNames>
@@ -698,7 +675,6 @@ model</ColNames>
     </column>
     <index id="167" parent="22" name="ybk_clinical_creator_id_d997a443">
       <ColNames>creator_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="168" parent="22">
       <ColNames>id</ColNames>
@@ -730,16 +706,13 @@ model</ColNames>
     <index id="173" parent="23" name="ybk_clinical_num_clinical_id_specimen_id_69540157_uniq">
       <ColNames>clinical_id
 specimen_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="174" parent="23" name="ybk_clinical_num_clinical_id_cda34a67">
       <ColNames>clinical_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="175" parent="23" name="ybk_clinical_num_specimen_id_749c944d">
       <ColNames>specimen_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="176" parent="23">
       <ColNames>id</ColNames>
@@ -777,7 +750,6 @@ specimen_id</ColNames>
     </column>
     <index id="182" parent="24" name="ybk_followup_creator_id_07d0f44f">
       <ColNames>creator_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="183" parent="24">
       <ColNames>id</ColNames>
@@ -809,16 +781,13 @@ specimen_id</ColNames>
     <index id="188" parent="25" name="ybk_followup_Fnum_followup_id_specimen_id_bcb90f12_uniq">
       <ColNames>followup_id
 specimen_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="189" parent="25" name="ybk_followup_Fnum_followup_id_9318de3b">
       <ColNames>followup_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="190" parent="25" name="ybk_followup_Fnum_specimen_id_58ce5c8e">
       <ColNames>specimen_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="191" parent="25">
       <ColNames>id</ColNames>
@@ -861,7 +830,6 @@ specimen_id</ColNames>
     </column>
     <index id="198" parent="26" name="ybk_outlist_creator_id_041927db">
       <ColNames>creator_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="199" parent="26">
       <ColNames>id</ColNames>
@@ -893,16 +861,13 @@ specimen_id</ColNames>
     <index id="204" parent="27" name="ybk_outlist_snum_outlist_id_sample_info_id_c24b0c13_uniq">
       <ColNames>outlist_id
 sample_info_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="205" parent="27" name="ybk_outlist_snum_outlist_id_5fb5b493">
       <ColNames>outlist_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="206" parent="27" name="ybk_outlist_snum_sample_info_id_43549303">
       <ColNames>sample_info_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="207" parent="27">
       <ColNames>id</ColNames>
@@ -936,7 +901,6 @@ sample_info_id</ColNames>
     <index id="212" parent="28" name="sqlite_autoindex_ybk_role_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>name</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="213" parent="28">
@@ -985,11 +949,9 @@ sample_info_id</ColNames>
     </column>
     <index id="222" parent="29" name="ybk_sample_info_creator_id_50e031a5">
       <ColNames>creator_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="223" parent="29" name="ybk_sample_info_num_id_604cb721">
       <ColNames>num_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="224" parent="29">
       <ColNames>id</ColNames>
@@ -1038,12 +1000,10 @@ sample_info_id</ColNames>
     <index id="232" parent="30" name="sqlite_autoindex_ybk_sample_pos_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>snum_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="233" parent="30" name="ybk_sample_pos_box_ID_id_bc89bbd1">
       <ColNames>box_ID_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="234" parent="30">
       <ColNames>id</ColNames>
@@ -1090,7 +1050,6 @@ sample_info_id</ColNames>
     </column>
     <index id="242" parent="31" name="ybk_science_creator_id_8b5618ab">
       <ColNames>creator_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="243" parent="31">
       <ColNames>id</ColNames>
@@ -1122,16 +1081,13 @@ sample_info_id</ColNames>
     <index id="248" parent="32" name="ybk_science_snum_science_id_sample_info_id_90217398_uniq">
       <ColNames>science_id
 sample_info_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="249" parent="32" name="ybk_science_snum_science_id_82a53069">
       <ColNames>science_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="250" parent="32" name="ybk_science_snum_sample_info_id_fbba1399">
       <ColNames>sample_info_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="251" parent="32">
       <ColNames>id</ColNames>
@@ -1174,7 +1130,6 @@ sample_info_id</ColNames>
     </column>
     <index id="258" parent="33" name="ybk_sheet_creator_id_dddc2ce9">
       <ColNames>creator_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="259" parent="33">
       <ColNames>id</ColNames>
@@ -1211,12 +1166,10 @@ sample_info_id</ColNames>
     <index id="265" parent="34" name="sqlite_autoindex_ybk_sheet_pos_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>shnum_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="266" parent="34" name="ybk_sheet_pos_bank_id_id_11c368b1">
       <ColNames>bank_id_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="267" parent="34">
       <ColNames>id</ColNames>
@@ -1283,11 +1236,9 @@ sample_info_id</ColNames>
     </column>
     <index id="279" parent="35" name="ybk_specimen_creator_id_b222551d">
       <ColNames>creator_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="280" parent="35" name="ybk_specimen_specimen_info_id_03fb31d7">
       <ColNames>specimen_info_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="281" parent="35">
       <ColNames>id</ColNames>
@@ -1350,7 +1301,6 @@ sample_info_id</ColNames>
     </column>
     <index id="292" parent="36" name="ybk_specimen_info_creator_id_571ad074">
       <ColNames>creator_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="293" parent="36">
       <ColNames>id</ColNames>
@@ -1382,7 +1332,6 @@ sample_info_id</ColNames>
     <index id="298" parent="37" name="sqlite_autoindex_ybk_userlist_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="299" parent="37">
@@ -1419,16 +1368,13 @@ sample_info_id</ColNames>
     <index id="305" parent="38" name="ybk_userlist_roles_userlist_id_role_id_7979f4ed_uniq">
       <ColNames>userlist_id
 role_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="306" parent="38" name="ybk_userlist_roles_userlist_id_2193afed">
       <ColNames>userlist_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="307" parent="38" name="ybk_userlist_roles_role_id_2099c992">
       <ColNames>role_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="308" parent="38">
       <ColNames>id</ColNames>

@@ -35,7 +35,7 @@ container
 
 
 
-            选择类型<select id="leixing" name="lx" class="select2-dropdown">
+            选择类型<select id="leixing" name="lx" class="select2-dropdown " >
                 <option value="0">全血</option>
             　　<option value="1">尿</option>
             　　<option value="2">组织</option>
@@ -48,8 +48,35 @@ container
             <button type="submit" >查询</button>
             </form>
         </div>
-        <div class="panel-footer">
 
+        <div class="panel-footer">
+        <table class="table table-bordered  table-hover">
+                <thead>
+                <td>样本编号</td>
+                <td>姓名</td>
+                <td>类型</td>
+                <td>病历号</td>
+
+
+
+                </thead>
+            {% for sap in sap  %}
+                <tr>
+                <td>{{ sap.num }}</td>
+                <td>{{ sap.name }}</td>
+                <td>{{ sap.classf|displayName:'lx' }}</td>
+                <td>{{ sap.specimen_info__blh }}</td>
+
+
+
+
+                </tr>
+
+
+
+
+            {% endfor %}
+        </table>
         </div>
 
 
