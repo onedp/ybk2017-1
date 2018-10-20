@@ -7,6 +7,27 @@ from django.db.models import Q
 
 
 def fenzh(request):
+    if request.method == 'POST':
+        fenlist= request.POST.get('fenlist')
+        fenbiao= request.POST.get('fenbiao')
+
+        # for i in fenlist.split('&').split('='):
+
+
+        import re
+        dd=re.split('&|=',fenlist)
+
+        print(dd)
+
+
+
+
+
+        print(fenbiao)
+
+
+
+
     q1 = Q()
     q1.connector = 'AND'
     q2 = Q()
@@ -17,6 +38,7 @@ def fenzh(request):
     try:
         tm=request.GET.get('timel')
         lx=request.GET.get('lx')
+
 
 
         q1.children.append(('classf',lx))

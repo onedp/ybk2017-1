@@ -36,36 +36,43 @@ container
 
 
             选择类型<select id="leixing" name="lx" class="select2-dropdown " >
-                <option value="0">全血</option>
-            　　<option value="1">尿</option>
-            　　<option value="2">组织</option>
-            　　<option value="3">精液</option>
-            　　<option value="4">卵泡液</option>
-            　　<option value="5">毛发</option>  　　
+                <option id="a0" value="0">全血</option>
+            　　<option  id="a1" value="1">尿</option>
+            　　<option id="a2" value="2">组织</option>
+            　　<option id="a3" value="3">精液</option>
+            　　<option id="a4" value="4">卵泡液</option>
+            　　<option id="a5" value="5" >毛发</option>  　　
 
 
             </select>
+
+
+
+
+
+
             <button type="submit" >查询</button>
             </form>
         </div>
 
-        <div class="panel-footer">
+        <div class="panel-footer " style=" overflow:scroll; width:100%; height:600px;">
         <table class="table table-bordered  table-hover">
                 <thead>
-                <td>样本编号</td>
-                <td>姓名</td>
-                <td>类型</td>
-                <td>病历号</td>
+                <td style="word-break: keep-all;white-space:nowrap;"><input type="checkbox">全选 </td>
+                <td style="word-break: keep-all;white-space:nowrap;">样本编号</td>
+                <td style="word-break: keep-all;white-space:nowrap;">姓名</td>
+                <td style="word-break: keep-all;white-space:nowrap;">类型</td>
+                <td style="word-break: keep-all;white-space:nowrap;" >病历号</td>
 
 
 
                 </thead>
             {% for sap in sap  %}
-                <tr>
-                <td>{{ sap.num }}</td>
-                <td>{{ sap.name }}</td>
-                <td>{{ sap.classf|displayName:'lx' }}</td>
-                <td>{{ sap.specimen_info__blh }}</td>
+                <tr><td><input type="checkbox" value="{{ sap.num}}" name="xuanlist"></td>
+                <td style="word-break: keep-all;white-space:nowrap;">{{ sap.num }}</td>
+                <td style="word-break: keep-all;white-space:nowrap;">{{ sap.name }}</td>
+                <td style="word-break: keep-all;white-space:nowrap;">{{ sap.classf|displayName:'lx' }}</td>
+                <td style="word-break: keep-all;white-space:nowrap;">{{ sap.specimen_info__blh }}</td>
 
 
 
@@ -91,13 +98,20 @@ container
             <div id="tiao"style="display: none">
 
             <tr><td>
-            <select id="leixing1" name="类型" class="select2-dropdown">
+            <select id="leixing1" name="lx2" class="select2-dropdown">
                 <option value="0">全血</option>
             　　<option value="1">尿</option>
-            　　<option value="2">组织</option>
-            　　<option value="3">精液</option>
+            　　<option value="2">精子</option>
+            　　<option value="3">精浆</option>
             　　<option value="4">卵泡液</option>
-            　　<option value="5">毛发</option>  　　
+            　　<option value="5">颗粒细胞</option>  　　
+            　　<option value="6">血清</option>  　　
+            　　<option value="7">血浆</option>  　　
+            　　<option value="8">白细胞</option>  　　
+            　　<option value="9">血细胞</option>  　　
+            　　<option value="10">胎盘</option>  　　
+            　　<option value="11">脐带</option>  　　
+            　　<option value="12">毛发</option>  　　
             </select>
                 </td>
                 <td>
@@ -119,12 +133,14 @@ container
              </select>
             <button class="btn btn-default" type="button">添加模板</button>
             <button class="btn btn-default" type="button" onclick="tianjia()" >添加</button>
-            <form id="fenlist" class="panel-body">
+            <button id="go" type="button" class="btn btn-default" >go</button>
+            <form id="fenlist" class="panel-body" method="post" action="/inybk/fen">
+
                 <tr>
                     <td>__类型___</td>
                     <td>___数量</td>
                     <td>_体积</td>
-                    <td>_-_</td>
+                    <td>_删除_</td>
                 </tr>
 
             </form>
@@ -173,6 +189,12 @@ container
 
 
     <script>
+
+
+  $('#a{{ lx }}').attr("selected","selected")
+
+
+
         var ide=1
         var idea='a'
 function tianjia() {
@@ -199,6 +221,32 @@ $('.form_date').datetimepicker({
 		forceParse: 0,
         Boolean: "linked"
     });
-$('.form_date').datetimepicker('update',formatDate(thisNow,'yyyy-mm-dd'));
+{#更新时间到现在，好像有问题#}
+{#$('.form_date').datetimepicker('update',formatDate(thisNow,'yyyy-mm-dd'));#}
+
+
+
+$("#go").click(function(){
+fenlist=new Array();
+    fenlist=$('#fenlist').serialize();
+
+    fenbiao=new Array();
+    $.each($('input:checkbox:checked'),function(){
+        fenbiao.push($(this).val());
+
+    });
+    fenbiao=fenbiao.join()
+
+
+    var arg = {};
+    var arg1="fenlist";
+    var arg2="fenbiao";
+    console.log(typeof(fenlist))
+    arg[arg1]=fenlist;
+    arg[arg2]=fenbiao;
+    $.post("/inybk/fen/", arg);
+
+
+});
     </script>
 {% endblock %}
