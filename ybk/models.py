@@ -13,7 +13,7 @@ class Specimen(models.Model):
     specimen_info=models.ForeignKey('Specimen_info',on_delete=models.CASCADE)
     creator=models.ForeignKey('Userlist',on_delete=models.CASCADE)
     remark=models.TextField(null=True,blank=True)
-    creattime=models.TimeField(auto_created='NOW')
+    creattime=models.DateTimeField(auto_now=True)
     fentime=models.DateField(null=True,blank=True)
     def __str__(self):
         return self.num
@@ -35,13 +35,13 @@ class Specimen_info(models.Model):
 class Sample_info(models.Model):
     num=models.ForeignKey('Specimen',on_delete=models.CASCADE,)
     snum=models.CharField(verbose_name='样本编号',max_length=32)
-    classf_list = ((0,'血清'),(1,'血浆'),(2,'组织'),)
+    classf_list = ((0,'全血'),(1,'尿'),(2,'精子'),(3,'精浆'),(5,'颗粒细胞'),(4,'卵泡液'),(6,'血清'),(7,'血浆'),(8,'白细胞'),(9,'血细胞'),(10,'胎盘'),(11,'脐带'),(12,'毛发'),)
     classf = models.SmallIntegerField(choices=classf_list)
     volume=models.PositiveIntegerField(null=True,blank=True)
     creator = models.ForeignKey('Userlist',on_delete=models.CASCADE)
 
-    creattime=models.TimeField(auto_created='NOW')
 
+    creattime=models.DateField(auto_now=True)
     def __str__(self):
         return self.snum
 
@@ -144,7 +144,7 @@ class Apply(models.Model):
     creator = models.ForeignKey('Userlist',on_delete=models.CASCADE)
 
     check=models.NullBooleanField(null=True,blank=True)
-    creattime = models.TimeField(auto_created='NOW')
+    creattime = models.DateField(auto_now=True)
     def __str__(self):
         return self.applynum
     class Meta:
@@ -154,7 +154,7 @@ class Apply(models.Model):
 class Outlist(models.Model):
     outlist=models.CharField(max_length=32)
 
-    creattime = models.TimeField(auto_created='NOW')
+    creattime = models.DateField(auto_now=True)
     snum=models.ManyToManyField('Sample_info')
 
     creator = models.ForeignKey('Userlist',on_delete=models.CASCADE)

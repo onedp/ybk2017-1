@@ -68,7 +68,7 @@ container
 
                 </thead>
             {% for sap in sap  %}
-                <tr><td><input type="checkbox" value="{{ sap.num}}" name="xuanlist"></td>
+                <tr><td><input type="checkbox" value="{{ sap.id}}" name="xuanlist"></td>
                 <td style="word-break: keep-all;white-space:nowrap;">{{ sap.num }}</td>
                 <td style="word-break: keep-all;white-space:nowrap;">{{ sap.name }}</td>
                 <td style="word-break: keep-all;white-space:nowrap;">{{ sap.classf|displayName:'lx' }}</td>
@@ -158,8 +158,43 @@ container
 条目
 
         </div>
-        <div class="panel-footer">
-            条目
+
+             <div class="panel-footer " style=" overflow:scroll; width:100%; height:600px;">
+        <table class="table table-bordered  table-hover">
+                <thead>
+                <td style="word-break: keep-all;white-space:nowrap;"><input type="checkbox">全选 </td>
+                <td style="word-break: keep-all;white-space:nowrap;">样本编号</td>
+                <td style="word-break: keep-all;white-space:nowrap;">姓名</td>
+                <td style="word-break: keep-all;white-space:nowrap;">类型</td>
+                <td style="word-break: keep-all;white-space:nowrap;" >病历号</td>
+
+
+
+                </thead>
+            {% for fensap in fensap  %}
+                <tr><td><input type="checkbox" value="{{ fensap.id}}" name="fenxuanlist"></td>
+                <td style="word-break: keep-all;white-space:nowrap;">{{ fensap.num }}</td>
+                <td style="word-break: keep-all;white-space:nowrap;">{{ fensap.name }}</td>
+                <td style="word-break: keep-all;white-space:nowrap;">{{ fensap.classf|displayName:'lx' }}</td>
+                <td style="word-break: keep-all;white-space:nowrap;">{{ fensap.specimen_info__blh }}</td>
+
+
+
+
+                </tr>
+
+
+
+
+            {% endfor %}
+        </table>
+        </div>
+
+
+
+
+
+
         </div>
 
         </div>
@@ -231,7 +266,7 @@ fenlist=new Array();
     fenlist=$('#fenlist').serialize();
 
     fenbiao=new Array();
-    $.each($('input:checkbox:checked'),function(){
+    $.each($('input[name=xuanlist]:checkbox:checked'),function(){
         fenbiao.push($(this).val());
 
     });
@@ -241,10 +276,15 @@ fenlist=new Array();
     var arg = {};
     var arg1="fenlist";
     var arg2="fenbiao";
-    console.log(typeof(fenlist))
+    var arg3="gn";
+{#    填写功能#}
+
     arg[arg1]=fenlist;
     arg[arg2]=fenbiao;
-    $.post("/inybk/fen/", arg);
+    arg[arg3]="fenzhuang";
+    $.post("/inybk/fen/", arg,function () {alert('fenzhuangchenggong')
+
+    });
 
 
 });
