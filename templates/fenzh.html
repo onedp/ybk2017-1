@@ -55,8 +55,8 @@ container
             </form>
         </div>
 
-        <div class="panel-footer " style=" overflow:scroll; width:100%; height:600px;">
-        <table class="table table-bordered  table-hover">
+        <div class="panel-body " style=" overflow:scroll; width:100%; height:600px;">
+        <table class="table table-bordered  table-hover table-condensed">
                 <thead>
                 <td style="word-break: keep-all;white-space:nowrap;"><input type="checkbox">全选 </td>
                 <td style="word-break: keep-all;white-space:nowrap;">样本编号</td>
@@ -145,8 +145,19 @@ container
 
             </form>
         </div>
-        <div class="panel-footer">
-            条目
+        <div class="panel-body">
+
+        <table id="jieguo" class="table table-bordered  table-hover table-condensed">
+                <thead>
+
+                <td style="word-break: keep-all;white-space:nowrap;">样本编号</td>
+                <td style="word-break: keep-all;white-space:nowrap;">类型</td>
+                <td style="word-break: keep-all;white-space:nowrap;" >体积</td>
+
+
+                </thead>
+
+        </table>
         </div>
 
         </div>
@@ -155,12 +166,12 @@ container
         <div class="panel-body">
 
 
-条目
+        <button class="btn btn-default" type="button" id="qxfz">取消分装</button>
 
         </div>
 
-             <div class="panel-footer " style=" overflow:scroll; width:100%; height:600px;">
-        <table class="table table-bordered  table-hover">
+             <div class="panel-body " style=" overflow:scroll; width:100%; height:600px;">
+        <table class="table table-bordered  table-hover table-condensed">
                 <thead>
                 <td style="word-break: keep-all;white-space:nowrap;"><input type="checkbox">全选 </td>
                 <td style="word-break: keep-all;white-space:nowrap;">样本编号</td>
@@ -169,11 +180,10 @@ container
                 <td style="word-break: keep-all;white-space:nowrap;" >病历号</td>
 
 
-
                 </thead>
             {% for fensap in fensap  %}
                 <tr><td><input type="checkbox" value="{{ fensap.id}}" name="fenxuanlist"></td>
-                <td style="word-break: keep-all;white-space:nowrap;">{{ fensap.num }}</td>
+                <td style="word-break: keep-all;white-space:nowrap;"><button class="btn-xs" style="width: 100% ;background-color: #fff" type="button" >{{ fensap.num }}</button></td>
                 <td style="word-break: keep-all;white-space:nowrap;">{{ fensap.name }}</td>
                 <td style="word-break: keep-all;white-space:nowrap;">{{ fensap.classf|displayName:'lx' }}</td>
                 <td style="word-break: keep-all;white-space:nowrap;">{{ fensap.specimen_info__blh }}</td>
@@ -259,8 +269,6 @@ $('.form_date').datetimepicker({
 {#更新时间到现在，好像有问题#}
 {#$('.form_date').datetimepicker('update',formatDate(thisNow,'yyyy-mm-dd'));#}
 
-
-
 $("#go").click(function(){
 fenlist=new Array();
     fenlist=$('#fenlist').serialize();
@@ -270,7 +278,7 @@ fenlist=new Array();
         fenbiao.push($(this).val());
 
     });
-    fenbiao=fenbiao.join()
+    fenbiao=fenbiao.join();
 
 
     var arg = {};
@@ -282,11 +290,81 @@ fenlist=new Array();
     arg[arg1]=fenlist;
     arg[arg2]=fenbiao;
     arg[arg3]="fenzhuang";
-    $.post("/inybk/fen/", arg,function () {alert('fenzhuangchenggong')
+    $.post("/inybk/fen/", arg,function () {alert('分装成功');
 
     });
 
 
 });
+
+
+$("#qxfz").click(
+    function () {
+   yfbiao=new Array();
+       $.each($('input[name=fenxuanlist]:checkbox:checked'),function(){
+        yfbiao.push($(this).val());
+
+    });
+        yfbiao=yfbiao.join()
+            var arg = {};
+
+    var arg1="yfbiao";
+    var arg2="gn";
+{#    填写功能#}
+
+    arg[arg1]=yfbiao;
+    arg[arg2]="qxfz";
+    $.post("/inybk/fen/", arg,function () {alert('已取消粉状');
+    }
+);});
+$(".btn-xs").click(
+    function(){
+    {#console.log(typeof ($(this).text()))#}
+     var arg = {};
+
+    var arg1="chakan";
+    var arg2="gn";
+{#    填写功能#}
+
+    arg[arg1]=$(this).text();
+    arg[arg2]="ck";
+    $.post("/inybk/fen/", arg,function (date,status) {
+
+        console.log(date)
+
+        testJson = eval("(" + date + ")");
+
+        console.log(testJson)
+
+        for (da in date){
+            {#var txt0=$("<tr>");#}
+            {##}
+            {#var txt1=$("<td></td>").text(da.snum);#}
+            {#var txt2=$("<td></td>").text(da.classf);#}
+            {#var txt3=$("<td></td>").text(da.value);#}
+            {#var txt4=$("</tr>");#}
+            {#$("#jieguo").append(txt0,txt1,txt2,txt3,txt4);#}
+            $("#jieguo").append(da);
+            $("#jieguo").append("<p>wa</p>");
+
+
+        }
+
+
+
+
+
+
+
+
+    })
+
+
+}
+
+
+
+
+);
     </script>
 {% endblock %}

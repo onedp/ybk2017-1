@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render ,HttpResponse
 from ybk.models import *
 from django.db.models import Q
 import time
@@ -47,11 +47,22 @@ def fenzh(request):
                     spl.append(spa)
 
             Sample_info.objects.bulk_create(spl)
-
+        elif gn == 'qxfz':
+            print('qxfz')
+            yfbiao = request.POST.get('yfbiao')
+            for sp in yfbiao.split(','):
+                dd=Specimen.objects.get(id=sp)
+                dd.fentime='2000-01-01'
+                dd.specimen_state=0
+                dd.save()
+                Sample_info.objects.filter(num_id=sp).delete()
 
             # ['lx2', '0', 'shuliang', '1', 'tiji', '2']
 
-
+        elif gn=='ck':
+            chakan=request.POST.get('chakan')
+            cklist=Sample_info.objects.filter(num__num=chakan).values('snum','classf','volume')
+            return HttpResponse(cklist)
 
 
 
@@ -72,6 +83,7 @@ def fenzh(request):
 
     try:
         tm=request.GET.get('timel')
+        tm=tm.strip()
         lx=request.GET.get('lx')
 
 
@@ -79,22 +91,20 @@ def fenzh(request):
         q1.children.append(('classf',lx))
         q2.children.append(('classf',lx))
         q2.children.append(('fentime',tm))
-        print("a哈哈哈哈")
+        print("a哈哈哈哈",q2,'q11111',q1)
+
         sap = Specimen.objects.filter(q1).values('num', 'name', 'classf', 'specimen_info__blh','id')
         fensap = Specimen.objects.filter(q2).values('num', 'name', 'classf', 'specimen_info__blh','id')
 
         for a in sap:
             print(a)
-        for a in fensap:
-            print("fen",a)
+        for a2 in fensap:
+            print("fen",a2)
 
 
         return render(request, 'fenzh.html',{'sap':sap,'fensap':fensap,'lx':lx})
     except:
         pass
-
-
-
 
 
 
