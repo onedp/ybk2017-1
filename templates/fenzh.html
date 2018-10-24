@@ -95,9 +95,10 @@ container
         <div class="panel-heading">分装</div>
         <div class="panel-body">
 
-            <div id="tiao"style="display: none">
+            <div id="tiao" style="display: none">
 
-            <tr><td>
+            <tr>
+                <td>
             <select id="leixing1" name="lx2" class="select2-dropdown">
                 <option value="0">全血</option>
             　　<option value="1">尿</option>
@@ -115,14 +116,18 @@ container
             </select>
                 </td>
                 <td>
-            <input id="nm" type="text" name="shuliang" style="width: 40px"></td>
+            <input id="nm" type="text" name="shuliang" style="width: 80px"></td>
 
-            <td><input id="vm" type="text" name="tiji" style="width: 40px"></td>
+            <td><input id="vm" type="text" name="tiji" style="width: 80px"></td>
 
             <td><button class="btn btn-default" type="button" onclick="quchu(this)">-</button> </td>
 
                 </tr>
             </div>
+
+
+
+
              <select id="leixing1" name="类型" class="select2-dropdown">
                  <option value="0">全血1</option>
             　　<option value="1">尿2</option>
@@ -134,20 +139,32 @@ container
             <button class="btn btn-default" type="button">添加模板</button>
             <button class="btn btn-default" type="button" onclick="tianjia()" >添加</button>
             <button id="go" type="button" class="btn btn-default" >go</button>
-            <form id="fenlist" class="panel-body" method="post" action="/inybk/fen">
+            <form id="fenlist" class="panel-body" method="post" style=" overflow:scroll; width:100%; height:300px;" action="/inybk/fen">
+             <table  class="table table-bordered  table-hover table-condensed">
 
+                <thead>
                 <tr>
-                    <td>__类型___</td>
-                    <td>___数量</td>
-                    <td>_体积</td>
-                    <td>_删除_</td>
+                    <td>类型</td>
+                    <td>数量</td>
+                    <td>体积</td>
+                    <td>删除</td>
                 </tr>
+                </thead>
+                  </table>
+                <table  class="table table-bordered  table-hover table-condensed">
+                 <tbody  id="fenlistxx">
 
+
+
+                 </tbody>
+
+
+             </table>
             </form>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" style=" overflow:scroll; width:100%; height:350px;">
 
-        <table id="jieguo" class="table table-bordered  table-hover table-condensed">
+        <table  class="table table-bordered  table-hover table-condensed">
                 <thead>
 
                 <td style="word-break: keep-all;white-space:nowrap;">样本编号</td>
@@ -156,7 +173,11 @@ container
 
 
                 </thead>
+            <tbody id="jieguo">
 
+
+
+            </tbody>
         </table>
         </div>
 
@@ -170,7 +191,7 @@ container
 
         </div>
 
-             <div class="panel-body " style=" overflow:scroll; width:100%; height:600px;">
+             <div class="panel-body " style=" overflow:scroll; width:100%; height:650px;">
         <table class="table table-bordered  table-hover table-condensed">
                 <thead>
                 <td style="word-break: keep-all;white-space:nowrap;"><input type="checkbox">全选 </td>
@@ -245,7 +266,7 @@ container
 function tianjia() {
 
     idea='a'+ide
-    $('#tiao').clone(true).appendTo('#fenlist').attr({'id':idea,'style':'float:left'});
+    $('#tiao').clone(true).appendTo('#fenlistxx').attr({'id':idea,'style':'float:left'});
 
     ide=ide+1
 };
@@ -270,7 +291,7 @@ $('.form_date').datetimepicker({
 {#$('.form_date').datetimepicker('update',formatDate(thisNow,'yyyy-mm-dd'));#}
 
 $("#go").click(function(){
-fenlist=new Array();
+    fenlist=new Array();
     fenlist=$('#fenlist').serialize();
 
     fenbiao=new Array();
@@ -291,7 +312,7 @@ fenlist=new Array();
     arg[arg2]=fenbiao;
     arg[arg3]="fenzhuang";
     $.post("/inybk/fen/", arg,function () {alert('分装成功');
-
+  window.location.reload();
     });
 
 
@@ -330,25 +351,20 @@ $(".btn-xs").click(
     arg[arg2]="ck";
     $.post("/inybk/fen/", arg,function (date,status) {
 
-        console.log(date)
+        $("#jieguo").empty()
+        var cars=new Array('全血','尿','精子','精浆','卵泡液', '颗粒细胞', '血清', '血浆','白细胞','血细胞','胎盘','脐带','毛发');
+        $.each($.parseJSON(date), function(i,item){
 
-        testJson = eval("(" + date + ")");
-
-        console.log(testJson)
-
-        for (da in date){
-            {#var txt0=$("<tr>");#}
-            {##}
-            {#var txt1=$("<td></td>").text(da.snum);#}
-            {#var txt2=$("<td></td>").text(da.classf);#}
-            {#var txt3=$("<td></td>").text(da.value);#}
-            {#var txt4=$("</tr>");#}
-            {#$("#jieguo").append(txt0,txt1,txt2,txt3,txt4);#}
-            $("#jieguo").append(da);
-            $("#jieguo").append("<p>wa</p>");
+                        $("#jieguo").append("<tr>" + "<td>" + item.snum + "</td>"+ "<td>" + cars[item.classf] +"</td>"+ "<td>" + item.volume + "</td>"+ "</tr>")
 
 
-        }
+
+
+
+
+
+
+        });
 
 
 

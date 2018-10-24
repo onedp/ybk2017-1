@@ -19,6 +19,7 @@ from ybk.views import *
 from inybk.views import *
 urlpatterns = [
     path('fen/', fenzh),
+    path('cun/', cunru),
 
 
 ]

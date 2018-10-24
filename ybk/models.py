@@ -39,8 +39,11 @@ class Sample_info(models.Model):
     classf = models.SmallIntegerField(choices=classf_list)
     volume=models.PositiveIntegerField(null=True,blank=True)
     creator = models.ForeignKey('Userlist',on_delete=models.CASCADE)
+    fenshu=models.IntegerField(verbose_name='份数号',null=True,blank=True)
 
+    tap_list=((0,'入库'),(1,'待存'),(3,'出库'),(2,'入盒'),)
 
+    tap=models.SmallIntegerField(choices=tap_list)
     creattime=models.DateField(auto_now=True)
     def __str__(self):
         return self.snum
@@ -52,9 +55,7 @@ class Sample_pos(models.Model):
     snum=models.OneToOneField('Sample_info',on_delete=models.CASCADE)
     xy=models.PositiveSmallIntegerField(null=True,blank=True)
     box_ID=models.ForeignKey('Box',on_delete=models.CASCADE)
-    tap_list=((0,'入库'),(1,'待存'),(2,'出库'),(3,'入盒'),)
 
-    tap=models.SmallIntegerField(choices=tap_list)
     def __str__(self):
         return self.snum.snum
     class Meta:

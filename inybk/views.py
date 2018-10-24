@@ -2,6 +2,7 @@ from django.shortcuts import render ,HttpResponse
 from ybk.models import *
 from django.db.models import Q
 import time
+import json
 # Create your views here.
 
 
@@ -16,6 +17,9 @@ def fenzh(request):
             fenbiao= request.POST.get('fenbiao')
             flist=[]
             hao=1
+            print(fenlist)
+            print(fenbiao)
+
             for i in fenlist.split('&'):
                 a,b =i.split('=')
                 if a=='lx2':
@@ -43,7 +47,7 @@ def fenzh(request):
                 dd.save()
                 for spn in flist:
                     aa,bb,cc=spn
-                    spa=Sample_info(classf=aa,snum=dd.num+'-'+str(bb),volume=cc,num_id=sp,creator_id=1)
+                    spa=Sample_info(classf=aa,snum=dd.num+'-'+str(bb),fenshu=bb,tap=0,volume=cc,num_id=sp,creator_id=1)
                     spl.append(spa)
 
             Sample_info.objects.bulk_create(spl)
@@ -62,7 +66,8 @@ def fenzh(request):
         elif gn=='ck':
             chakan=request.POST.get('chakan')
             cklist=Sample_info.objects.filter(num__num=chakan).values('snum','classf','volume')
-            return HttpResponse(cklist)
+            result = json.dumps(list(cklist))
+            return HttpResponse(result)
 
 
 
@@ -110,3 +115,14 @@ def fenzh(request):
 
 
     return render(request,'fenzh.html')
+def cunru(request):
+    q1 = Q()
+    q1.connector = 'AND'
+    q1.children.append(('tap__lt',2))
+
+
+
+
+
+
+    return render(request,'cunru.html')
