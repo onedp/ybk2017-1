@@ -1,0 +1,64 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static tags %}
+
+
+{% block extrastyle %}
+
+<link href={% static "dist/bootstrap-table.css"%} rel="stylesheet" media="screen">
+
+
+{% endblock %}
+
+
+
+{% block body %}
+    <table id="asset_list_table" class="display table  table-hover" data-toggle="table"
+                data-url="{% url 'show_in_table' %}"
+                data-method="get"
+                data-pagination="true"
+                data-side-pagination="server"
+                data-page-list="[10, 20, 50, 100, 200]"
+                data-search="true" data-mobile-responsive="true" searchOnEnterKey="true"
+                data-show-refresh="true" data-show-columns="true"
+                data-show-toggle="true" data-page-size=20 data-unique-id="asset_id"
+                data-striped="true"
+                >
+              <thead >
+                    <tr>
+                    <th data-field="state" data-checkbox="true"></th>
+                    <th data-field="id" data-align="center" data-sortable="true">ID(点击ID查看详情)</th>
+                    <th data-field="snum" data-align="center" data-sortable="true"  data-width="50px">编号</th>
+                    <th data-field="classf" data-sortable="true">类型</th>
+                    <th data-field="volume" data-align="center" data-sortable="true"  data-class="volume">体积</th>
+                    <th data-field="fenshu" data-align="center" data-sortable="true"  data-class="fenshu">份数</th>
+                    <th data-field="name" data-sortable="true">姓名</th>
+                    <th data-field="creattime" data-sortable="true">创建日期</th>
+                    </tr>
+              </thead>
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block bottom-js %}
+
+
+<script type="text/javascript" src="{% static "dist/bootstrap-table.js"%}" charset="UTF-8"></script>
+<script type="text/javascript" src="{% static "dist/locale/bootstrap-table-zh-CN.js"%}" charset="UTF-8"></script>
+
+
+
+
+
+
+{% endblock %}

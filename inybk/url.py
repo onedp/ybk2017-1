@@ -20,6 +20,8 @@ from inybk.views import *
 urlpatterns = [
     path('fen/', fenzh),
     path('cun/', cunru),
+    path('showtable/', showtable,name='showtable'),
+
 
 
 ]
