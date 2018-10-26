@@ -21,6 +21,8 @@ urlpatterns = [
     path('fen/', fenzh),
     path('cun/', cunru),
     path('showtable/', showtable,name='showtable'),
+    path('showtable2/', show_asset_in_table,name='showtable2'),
+
 
 
 

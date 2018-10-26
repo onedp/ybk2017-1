@@ -11,16 +11,17 @@
 
 
 
-{% block body %}
-    <table id="asset_list_table" class="display table  table-hover" data-toggle="table"
-                data-url="{% url 'show_in_table' %}"
+{% block content%}
+
+    <table id="asset_list_table" class="display table  table-hover table-condensed" data-toggle="table"
+                data-url="{% url 'showtable2' %}"
                 data-method="get"
-                data-pagination="true"
+                data-pagination="true" {# 显示分页条 #}
                 data-side-pagination="server"
                 data-page-list="[10, 20, 50, 100, 200]"
                 data-search="true" data-mobile-responsive="true" searchOnEnterKey="true"
                 data-show-refresh="true" data-show-columns="true"
-                data-show-toggle="true" data-page-size=20 data-unique-id="asset_id"
+                data-show-toggle="true" data-page-size=10 data-unique-id="id"
                 data-striped="true"
                 >
               <thead >
